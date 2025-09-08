@@ -1,43 +1,37 @@
-什么是读写分离：
+## 什么是读写分离：
 https://help.aliyun.com/zh/rds/apsaradb-rds-for-mysql/what-is-read-or-write-splitting?scm=20140722.S_help%40%40%E6%96%87%E6%A1%A3%40%40197460._.ID_help%40%40%E6%96%87%E6%A1%A3%40%40197460-RL_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-LOC_doc%7EUND%7Eab-OR_ser-PAR1_212a5d3d17526712949823443d7ef6-V_4-RE_new5-P0_0-P1_0&spm=a2c4g.11186623.help-search.i41
 
-RDS开启读写分离：
+### RDS开启读写分离：
 https://help.aliyun.com/zh/rds/apsaradb-rds-for-mysql/use-the-read-or-write-splitting-feature-to-increase-the-processing-capability-of-an-apsaradb-rds-instance?scm=20140722.S_help%40%40%E6%96%87%E6%A1%A3%40%4026109._.ID_help%40%40%E6%96%87%E6%A1%A3%40%4026109-RL_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-LOC_doc%7EUND%7Eab-OR_ser-PAR1_212a5d3d17526667504226871d7ef6-V_4-RE_new5-P0_5-P1_0&spm=a2c4g.11186623.help-search.i15
 
-PolarDB-X 1.0的读写分离：
+### PolarDB-X 1.0的读写分离：
 https://help.aliyun.com/zh/polardb/polardb-for-xscale/read-or-write-splitting?scm=20140722.S_help%40%40%E6%96%87%E6%A1%A3%40%4029681._.ID_help%40%40%E6%96%87%E6%A1%A3%40%4029681-RL_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-LOC_doc%7EUND%7Eab-OR_ser-PAR1_212a5d3e17526665791681034d3611-V_4-RE_new5-P0_0-P1_0&spm=a2c4g.11174283.help-search.i29
 
-
-
-
-![](https://foruda.gitee.com/images/1752679096558519613/8ee9f774_8797417.png "屏幕截图")
-
-
-
-PolarDB-X 2.0的读写分离
+### PolarDB-X 2.0的读写分离
 https://help.aliyun.com/zh/polardb/polardb-for-xscale/configure-read-or-write-splitting?scm=20140722.S_help%40%40%E6%96%87%E6%A1%A3%40%40253372._.ID_help%40%40%E6%96%87%E6%A1%A3%40%40253372-RL_%E8%AF%BB%E5%86%99%E5%88%86%E7%A6%BB-LOC_doc%7EUND%7Eab-OR_ser-PAR1_212a5d3d17526666824766671d7ef6-V_4-RE_new5-P0_1-P1_0&spm=a2c4g.11186623.help-search.i46
 
 
-云原生数据库 PolarDB如何解决主键冲突问题：
+## 主键冲突
+### 云原生数据库 PolarDB如何解决主键冲突问题：
 https://help.aliyun.com/zh/polardb/polardb-for-xscale/limits-4?spm=5176.21213303.J_ZGek9Blx07Hclc3Ddt9dg.13.3fc42f3docI2Lx&scm=20140722.S_help@@%E6%96%87%E6%A1%A3@@316648._.ID_help@@%E6%96%87%E6%A1%A3@@316648-RL_%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%B8%BB%E9%94%AE%E5%86%B2%E7%AA%81-LOC_2024SPAllResult-OR_ser-PAR1_215043ff17526715084121255e745d-V_4-RE_new5-P0_3-P1_0
 
-DTS支持冲突检测：
+### DTS支持冲突检测：
 https://help.aliyun.com/zh/dts/user-guide/configure-two-way-data-synchronization-between-mysql-instances?spm=5176.21213303.0.0.3fc42f3docI2Lx&scm=20140722.S_help@@%E6%96%87%E6%A1%A3@@323408@@12.S_llmOS0.ID_2532592067-RL_%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8F%8C%E5%90%91%E5%90%8C%E6%AD%A5%E6%97%B6%E5%B8%A6%E6%9D%A5%E7%9A%84%E4%B8%BB%E9%94%AE%E5%86%B2%E7%AA%81-LOC_chat~DAS~llm-OR_ser-PAR1_213e371a17526716565887494e32a0-V_4-P0_0-P1_0#section-lj1-t3m-e7v
 
 
 
-避免主键冲突的最佳实践
+### 避免主键冲突的最佳实践
 为了最大程度减少主键冲突的发生，建议采取以下措施：
 
-1.1 确保唯一性约束
++ 1.1 确保唯一性约束
 在设计数据库表结构时，确保主键或业务主键具有 全局唯一性 。例如，使用UUID或时间戳+随机数生成主键，而不是简单的自增ID。
 对于需要频繁更新的字段，可以考虑引入一个虚拟列作为唯一性标识。
-1.2 业务层面控制
++ 1.2 业务层面控制
 单向写入原则：确保同一个主键、业务主键或唯一键的记录只在一个节点进行更新。例如，将某些特定的业务操作固定分配到某个节点执行。
 分区分责：通过业务逻辑划分不同节点的职责，避免多个节点同时修改同一记录。
-1.3 数据初始化
++ 1.3 数据初始化
 在双向同步任务启动前，确保源库和目标库的数据一致性。如果存在冲突数据（如重复主键），需手动清理或调整数据。
-1.4 监控与告警
++ 1.4 监控与告警
 定期检查同步任务的运行状态，关注冲突日志，及时发现并处理潜在问题。
 配置告警规则，当冲突数量超过阈值时触发通知，以便快速响应。
 
